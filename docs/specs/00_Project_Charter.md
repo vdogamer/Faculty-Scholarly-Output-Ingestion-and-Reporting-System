@@ -1,0 +1,1 @@
+Design and build an internal SQL Server + ASP.NET Core Razor Pages application that imports faculty records, matches faculty to verified OpenAlex Author IDs, ingests scholarly works, normalizes OpenAlex metadata, and produces department/faculty publication reports.
