@@ -1,7 +1,10 @@
 USE FacultyPublicationIngestion;
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_DashboardSummary
+IF OBJECT_ID(N'dbo.usp_DashboardSummary', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_DashboardSummary;
+GO
+CREATE PROCEDURE dbo.usp_DashboardSummary
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -18,7 +21,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_Faculty_List
+IF OBJECT_ID(N'dbo.usp_Faculty_List', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_Faculty_List;
+GO
+CREATE PROCEDURE dbo.usp_Faculty_List
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -41,7 +47,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_Faculty_Get
+IF OBJECT_ID(N'dbo.usp_Faculty_Get', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_Faculty_Get;
+GO
+CREATE PROCEDURE dbo.usp_Faculty_Get
     @FacultyId INT
 AS
 BEGIN
@@ -64,7 +73,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_FacultyOpenAlexAuthor_Verify
+IF OBJECT_ID(N'dbo.usp_FacultyOpenAlexAuthor_Verify', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_FacultyOpenAlexAuthor_Verify;
+GO
+CREATE PROCEDURE dbo.usp_FacultyOpenAlexAuthor_Verify
     @FacultyId INT,
     @OpenAlexAuthorId NVARCHAR(100),
     @Orcid NVARCHAR(100) = NULL,
@@ -121,7 +133,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexMatchCandidate_Upsert
+IF OBJECT_ID(N'dbo.usp_OpenAlexMatchCandidate_Upsert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexMatchCandidate_Upsert;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexMatchCandidate_Upsert
     @FacultyId INT,
     @OpenAlexAuthorId NVARCHAR(100),
     @OpenAlexDisplayName NVARCHAR(300) = NULL,
@@ -161,7 +176,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_MatchCandidates_List
+IF OBJECT_ID(N'dbo.usp_MatchCandidates_List', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_MatchCandidates_List;
+GO
+CREATE PROCEDURE dbo.usp_MatchCandidates_List
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -175,7 +193,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_MatchCandidate_Reject
+IF OBJECT_ID(N'dbo.usp_MatchCandidate_Reject', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_MatchCandidate_Reject;
+GO
+CREATE PROCEDURE dbo.usp_MatchCandidate_Reject
     @MatchCandidateId INT,
     @ReviewedBy NVARCHAR(150)
 AS
@@ -187,7 +208,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_VerifiedAuthorsForSync_List
+IF OBJECT_ID(N'dbo.usp_VerifiedAuthorsForSync_List', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_VerifiedAuthorsForSync_List;
+GO
+CREATE PROCEDURE dbo.usp_VerifiedAuthorsForSync_List
     @FacultyId INT = NULL
 AS
 BEGIN
@@ -203,7 +227,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexSyncRun_Start
+IF OBJECT_ID(N'dbo.usp_OpenAlexSyncRun_Start', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexSyncRun_Start;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexSyncRun_Start
     @SyncType NVARCHAR(50),
     @ScopeType NVARCHAR(50) = NULL,
     @ScopeValue NVARCHAR(200) = NULL
@@ -216,7 +243,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexSyncRun_Finish
+IF OBJECT_ID(N'dbo.usp_OpenAlexSyncRun_Finish', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexSyncRun_Finish;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexSyncRun_Finish
     @SyncRunId BIGINT,
     @Status NVARCHAR(50),
     @FacultyCount INT,
@@ -243,7 +273,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexApiErrorLog_Insert
+IF OBJECT_ID(N'dbo.usp_OpenAlexApiErrorLog_Insert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexApiErrorLog_Insert;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexApiErrorLog_Insert
     @SyncRunId BIGINT = NULL,
     @Endpoint NVARCHAR(500) = NULL,
     @QueryStringRedacted NVARCHAR(MAX) = NULL,
@@ -261,7 +294,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexSource_Upsert
+IF OBJECT_ID(N'dbo.usp_OpenAlexSource_Upsert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexSource_Upsert;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexSource_Upsert
     @OpenAlexSourceId NVARCHAR(100),
     @DisplayName NVARCHAR(500) = NULL,
     @IssnL NVARCHAR(50) = NULL,
@@ -298,7 +334,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexWork_Upsert
+IF OBJECT_ID(N'dbo.usp_OpenAlexWork_Upsert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexWork_Upsert;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexWork_Upsert
     @OpenAlexWorkId NVARCHAR(100),
     @Doi NVARCHAR(500) = NULL,
     @Pmid NVARCHAR(100) = NULL,
@@ -397,7 +436,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexWorkAuthorship_DeleteForWork
+IF OBJECT_ID(N'dbo.usp_OpenAlexWorkAuthorship_DeleteForWork', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexWorkAuthorship_DeleteForWork;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexWorkAuthorship_DeleteForWork
     @OpenAlexWorkId NVARCHAR(100)
 AS
 BEGIN
@@ -406,7 +448,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexWorkAuthorship_Insert
+IF OBJECT_ID(N'dbo.usp_OpenAlexWorkAuthorship_Insert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexWorkAuthorship_Insert;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexWorkAuthorship_Insert
     @OpenAlexWorkId NVARCHAR(100),
     @OpenAlexAuthorId NVARCHAR(100) = NULL,
     @AuthorDisplayName NVARCHAR(300) = NULL,
@@ -427,7 +472,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_FacultyWork_Upsert
+IF OBJECT_ID(N'dbo.usp_FacultyWork_Upsert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_FacultyWork_Upsert;
+GO
+CREATE PROCEDURE dbo.usp_FacultyWork_Upsert
     @FacultyId INT,
     @OpenAlexWorkId NVARCHAR(100),
     @OpenAlexAuthorId NVARCHAR(100),
@@ -457,7 +505,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_Publications_List
+IF OBJECT_ID(N'dbo.usp_Publications_List', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_Publications_List;
+GO
+CREATE PROCEDURE dbo.usp_Publications_List
     @FacultyId INT = NULL
 AS
 BEGIN
@@ -490,7 +541,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_Publications_ByDepartment
+IF OBJECT_ID(N'dbo.usp_Publications_ByDepartment', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_Publications_ByDepartment;
+GO
+CREATE PROCEDURE dbo.usp_Publications_ByDepartment
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -512,7 +566,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_SyncRuns_List
+IF OBJECT_ID(N'dbo.usp_SyncRuns_List', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_SyncRuns_List;
+GO
+CREATE PROCEDURE dbo.usp_SyncRuns_List
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -523,7 +580,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_Errors_List
+IF OBJECT_ID(N'dbo.usp_Errors_List', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_Errors_List;
+GO
+CREATE PROCEDURE dbo.usp_Errors_List
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -534,7 +594,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexTopic_Upsert
+IF OBJECT_ID(N'dbo.usp_OpenAlexTopic_Upsert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexTopic_Upsert;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexTopic_Upsert
     @OpenAlexTopicId NVARCHAR(100),
     @DisplayName NVARCHAR(500) = NULL,
     @RawJson NVARCHAR(MAX) = NULL
@@ -555,7 +618,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexWorkTopic_DeleteForWork
+IF OBJECT_ID(N'dbo.usp_OpenAlexWorkTopic_DeleteForWork', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexWorkTopic_DeleteForWork;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexWorkTopic_DeleteForWork
     @OpenAlexWorkId NVARCHAR(100)
 AS
 BEGIN
@@ -564,7 +630,10 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE dbo.usp_OpenAlexWorkTopic_Insert
+IF OBJECT_ID(N'dbo.usp_OpenAlexWorkTopic_Insert', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_OpenAlexWorkTopic_Insert;
+GO
+CREATE PROCEDURE dbo.usp_OpenAlexWorkTopic_Insert
     @OpenAlexWorkId NVARCHAR(100),
     @OpenAlexTopicId NVARCHAR(100),
     @Score DECIMAL(10,6) = NULL,
@@ -578,4 +647,198 @@ BEGIN
         VALUES (@OpenAlexWorkId, @OpenAlexTopicId, @Score, @IsPrimary);
     END
 END
+GO
+
+
+/*
+    Faculty Admin CRUD procedures
+    SQL Server 2016-compatible pattern: IF OBJECT_ID + DROP + CREATE.
+    The delete action is intentionally implemented as a soft delete/deactivate
+    for prototype safety and auditability.
+*/
+IF OBJECT_ID(N'dbo.usp_FacultyAdmin_List', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_FacultyAdmin_List;
+GO
+CREATE PROCEDURE dbo.usp_FacultyAdmin_List
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        f.FacultyId,
+        f.SourceFacultyId,
+        f.EmployeeId,
+        f.ComputingId,
+        f.FirstName,
+        f.MiddleName,
+        f.LastName,
+        f.DisplayName,
+        f.Email,
+        f.DepartmentCode,
+        f.DepartmentName,
+        f.AppointmentTitle,
+        f.IsActive,
+        f.IsPubliclyDisplayable,
+        f.SourceLastModifiedUtc,
+        f.CreatedUtc,
+        f.UpdatedUtc
+    FROM dbo.Faculty f
+    ORDER BY f.LastName, f.FirstName;
+END;
+GO
+
+IF OBJECT_ID(N'dbo.usp_FacultyAdmin_Create', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_FacultyAdmin_Create;
+GO
+CREATE PROCEDURE dbo.usp_FacultyAdmin_Create
+    @SourceFacultyId NVARCHAR(100) = NULL,
+    @EmployeeId NVARCHAR(100) = NULL,
+    @ComputingId NVARCHAR(100) = NULL,
+    @FirstName NVARCHAR(150),
+    @MiddleName NVARCHAR(150) = NULL,
+    @LastName NVARCHAR(150),
+    @DisplayName NVARCHAR(300) = NULL,
+    @Email NVARCHAR(320) = NULL,
+    @DepartmentCode NVARCHAR(50) = NULL,
+    @DepartmentName NVARCHAR(250) = NULL,
+    @AppointmentTitle NVARCHAR(250) = NULL,
+    @IsActive BIT = 1,
+    @IsPubliclyDisplayable BIT = 1
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF NULLIF(LTRIM(RTRIM(@SourceFacultyId)), N'') IS NULL
+    BEGIN
+        SET @SourceFacultyId = N'LOCAL-' + LEFT(CONVERT(NVARCHAR(36), NEWID()), 8);
+    END;
+
+    IF NULLIF(LTRIM(RTRIM(@DisplayName)), N'') IS NULL
+    BEGIN
+        SET @DisplayName = LTRIM(RTRIM(CONCAT(@FirstName, N' ', ISNULL(@MiddleName + N' ', N''), @LastName)));
+    END;
+
+    INSERT dbo.Faculty
+    (
+        SourceFacultyId,
+        EmployeeId,
+        ComputingId,
+        FirstName,
+        MiddleName,
+        LastName,
+        DisplayName,
+        Email,
+        DepartmentCode,
+        DepartmentName,
+        AppointmentTitle,
+        IsActive,
+        IsPubliclyDisplayable,
+        SourceLastModifiedUtc
+    )
+    VALUES
+    (
+        @SourceFacultyId,
+        NULLIF(LTRIM(RTRIM(@EmployeeId)), N''),
+        NULLIF(LTRIM(RTRIM(@ComputingId)), N''),
+        @FirstName,
+        NULLIF(LTRIM(RTRIM(@MiddleName)), N''),
+        @LastName,
+        @DisplayName,
+        NULLIF(LTRIM(RTRIM(@Email)), N''),
+        NULLIF(LTRIM(RTRIM(@DepartmentCode)), N''),
+        NULLIF(LTRIM(RTRIM(@DepartmentName)), N''),
+        NULLIF(LTRIM(RTRIM(@AppointmentTitle)), N''),
+        @IsActive,
+        @IsPubliclyDisplayable,
+        SYSUTCDATETIME()
+    );
+
+    SELECT CONVERT(INT, SCOPE_IDENTITY()) AS FacultyId;
+END;
+GO
+
+IF OBJECT_ID(N'dbo.usp_FacultyAdmin_Update', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_FacultyAdmin_Update;
+GO
+CREATE PROCEDURE dbo.usp_FacultyAdmin_Update
+    @FacultyId INT,
+    @SourceFacultyId NVARCHAR(100),
+    @EmployeeId NVARCHAR(100) = NULL,
+    @ComputingId NVARCHAR(100) = NULL,
+    @FirstName NVARCHAR(150),
+    @MiddleName NVARCHAR(150) = NULL,
+    @LastName NVARCHAR(150),
+    @DisplayName NVARCHAR(300) = NULL,
+    @Email NVARCHAR(320) = NULL,
+    @DepartmentCode NVARCHAR(50) = NULL,
+    @DepartmentName NVARCHAR(250) = NULL,
+    @AppointmentTitle NVARCHAR(250) = NULL,
+    @IsActive BIT = 1,
+    @IsPubliclyDisplayable BIT = 1
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF NULLIF(LTRIM(RTRIM(@DisplayName)), N'') IS NULL
+    BEGIN
+        SET @DisplayName = LTRIM(RTRIM(CONCAT(@FirstName, N' ', ISNULL(@MiddleName + N' ', N''), @LastName)));
+    END;
+
+    UPDATE dbo.Faculty
+    SET
+        SourceFacultyId = @SourceFacultyId,
+        EmployeeId = NULLIF(LTRIM(RTRIM(@EmployeeId)), N''),
+        ComputingId = NULLIF(LTRIM(RTRIM(@ComputingId)), N''),
+        FirstName = @FirstName,
+        MiddleName = NULLIF(LTRIM(RTRIM(@MiddleName)), N''),
+        LastName = @LastName,
+        DisplayName = @DisplayName,
+        Email = NULLIF(LTRIM(RTRIM(@Email)), N''),
+        DepartmentCode = NULLIF(LTRIM(RTRIM(@DepartmentCode)), N''),
+        DepartmentName = NULLIF(LTRIM(RTRIM(@DepartmentName)), N''),
+        AppointmentTitle = NULLIF(LTRIM(RTRIM(@AppointmentTitle)), N''),
+        IsActive = @IsActive,
+        IsPubliclyDisplayable = @IsPubliclyDisplayable,
+        SourceLastModifiedUtc = SYSUTCDATETIME(),
+        UpdatedUtc = SYSUTCDATETIME()
+    WHERE FacultyId = @FacultyId;
+END;
+GO
+
+IF OBJECT_ID(N'dbo.usp_FacultyAdmin_SetActive', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_FacultyAdmin_SetActive;
+GO
+CREATE PROCEDURE dbo.usp_FacultyAdmin_SetActive
+    @FacultyId INT,
+    @IsActive BIT,
+    @IsPubliclyDisplayable BIT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE dbo.Faculty
+    SET
+        IsActive = @IsActive,
+        IsPubliclyDisplayable = @IsPubliclyDisplayable,
+        UpdatedUtc = SYSUTCDATETIME()
+    WHERE FacultyId = @FacultyId;
+END;
+GO
+
+IF OBJECT_ID(N'dbo.usp_FacultyAdmin_SoftDelete', N'P') IS NOT NULL
+    DROP PROCEDURE dbo.usp_FacultyAdmin_SoftDelete;
+GO
+CREATE PROCEDURE dbo.usp_FacultyAdmin_SoftDelete
+    @FacultyId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE dbo.Faculty
+    SET
+        IsActive = 0,
+        IsPubliclyDisplayable = 0,
+        UpdatedUtc = SYSUTCDATETIME()
+    WHERE FacultyId = @FacultyId;
+END;
 GO
