@@ -57,3 +57,4 @@ SELECT s.SourceFacultyId, s.FirstName, s.LastName, s.DisplayName, s.Email, s.Dep
 FROM @SeedFaculty s
 WHERE NOT EXISTS (SELECT 1 FROM dbo.Faculty f WHERE f.SourceFacultyId = s.SourceFacultyId);
 GO
+
