@@ -22,7 +22,7 @@ public sealed class OpenAlexClient : IOpenAlexClient
     private readonly ILogger<OpenAlexClient> _logger;
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
 
-    private const string WorkSelectFields = "id,doi,title,display_name,publication_year,publication_date,type,language,cited_by_count,is_retracted,is_paratext,primary_location,best_oa_location,open_access,authorships,topics,mesh,indexed_in,referenced_works,related_works,ids,created_date,updated_date";
+    private const string WorkSelectFields = "id,doi,title,display_name,publication_year,publication_date,type,language,cited_by_count,is_retracted,is_paratext,primary_location,best_oa_location,open_access,authorships,topics,keywords,mesh,indexed_in,referenced_works,related_works,ids,created_date,updated_date";
 
     public OpenAlexClient(HttpClient httpClient, IOptions<OpenAlexOptions> options, ILogger<OpenAlexClient> logger)
     {
