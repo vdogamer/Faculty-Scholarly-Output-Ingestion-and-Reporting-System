@@ -1,7 +1,6 @@
 USE FacultyPublicationIngestion;
 GO
 
-
 CREATE TABLE dbo.Faculty
 (
     FacultyId INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Faculty PRIMARY KEY,
