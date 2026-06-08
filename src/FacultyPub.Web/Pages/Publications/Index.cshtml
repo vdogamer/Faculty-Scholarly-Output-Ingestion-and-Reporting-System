@@ -1,0 +1,25 @@
+@page
+@model FacultyPub.Web.Pages.Publications.IndexModel
+@{
+    ViewData["Title"] = "Publications";
+}
+<h1>Publications</h1>
+<table class="table table-striped table-sm align-middle">
+    <thead><tr><th>Year</th><th>Title</th><th>Faculty</th><th>Department</th><th>Source</th><th>PMID</th><th>PMCID</th><th>OA</th><th>Cites</th></tr></thead>
+    <tbody>
+    @foreach (var p in Model.Publications)
+    {
+        <tr>
+            <td>@p.PublicationYear</td>
+            <td>@(p.DisplayName ?? p.Title)</td>
+            <td>@p.FacultyDisplayName</td>
+            <td>@p.DepartmentName</td>
+            <td>@p.PrimarySourceName</td>
+            <td>@p.Pmid</td>
+            <td>@p.Pmcid</td>
+            <td>@p.OpenAccessStatus</td>
+            <td>@p.CitedByCount</td>
+        </tr>
+    }
+    </tbody>
+</table>

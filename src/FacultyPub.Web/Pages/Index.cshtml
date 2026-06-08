@@ -1,0 +1,32 @@
+@page
+@model FacultyPub.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Faculty Publication Ingestion Prototype</h1>
+<p class="lead">Local Razor Pages prototype for faculty-author matching, OpenAlex works ingestion, and SQL Server reporting.</p>
+
+@if (!Model.IsOpenAlexConfigured)
+{
+    <div class="alert alert-warning">
+        OpenAlex API key is not configured. Use <code>dotnet user-secrets set "OpenAlex:ApiKey" "YOUR_KEY"</code> before running sync.
+    </div>
+}
+
+<div class="row g-3">
+    <div class="col-md-3"><div class="card"><div class="card-body"><div class="text-muted">Faculty</div><div class="display-6">@Model.Summary.FacultyCount</div></div></div></div>
+    <div class="col-md-3"><div class="card"><div class="card-body"><div class="text-muted">Verified Authors</div><div class="display-6">@Model.Summary.VerifiedAuthorCount</div></div></div></div>
+    <div class="col-md-3"><div class="card"><div class="card-body"><div class="text-muted">Works</div><div class="display-6">@Model.Summary.WorkCount</div></div></div></div>
+    <div class="col-md-3"><div class="card"><div class="card-body"><div class="text-muted">API Errors</div><div class="display-6">@Model.Summary.ErrorCount</div></div></div></div>
+</div>
+
+<div class="row g-3 mt-2">
+    <div class="col-md-4"><div class="card"><div class="card-body"><div class="text-muted">Pending / Needs Evidence Matches</div><div class="display-6">@Model.Summary.CandidateCount</div></div></div></div>
+    <div class="col-md-4"><div class="card"><div class="card-body"><div class="text-muted">PMID Without PMCID</div><div class="display-6">@Model.Summary.PmidWithoutPmcidCount</div></div></div></div>
+    <div class="col-md-4"><div class="card"><div class="card-body"><div class="text-muted">Retracted Works</div><div class="display-6">@Model.Summary.RetractedWorkCount</div></div></div></div>
+</div>
+
+<div class="alert alert-info mt-4">
+    Prototype rule: a value beginning with <strong>W</strong> is treated as a Work ID and cannot be approved as an OpenAlex Author ID.
+</div>

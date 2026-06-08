@@ -1,0 +1,48 @@
+@page "{id:int}"
+@model FacultyPub.Web.Pages.Faculty.DetailsModel
+@{
+    ViewData["Title"] = "Faculty Detail";
+}
+@if (Model.Faculty is null)
+{
+    <div class="alert alert-danger">Faculty record not found.</div>
+}
+else
+{
+    <h1>@Model.Faculty.DisplayName</h1>
+    <div class="card mb-3">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Department</dt><dd class="col-sm-9">@Model.Faculty.DepartmentName</dd>
+                <dt class="col-sm-3">Title</dt><dd class="col-sm-9">@Model.Faculty.AppointmentTitle</dd>
+                <dt class="col-sm-3">Email</dt><dd class="col-sm-9">@Model.Faculty.Email</dd>
+                <dt class="col-sm-3">Verified Author</dt><dd class="col-sm-9"><code>@Model.Faculty.VerifiedOpenAlexAuthorId</code></dd>
+                <dt class="col-sm-3">Publications</dt><dd class="col-sm-9">@Model.Faculty.PublicationCount</dd>
+            </dl>
+        </div>
+    </div>
+
+    <h2>Manually verify OpenAlex Author ID</h2>
+    <p class="text-muted">Only identifiers that start with <code>A</code> are accepted here. Work IDs such as <code>W4292121792</code> are intentionally blocked.</p>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger" asp-validation-summary="All"></div>
+    }
+
+    <form method="post" asp-page-handler="Verify" class="card card-body">
+        <div class="mb-3">
+            <label asp-for="OpenAlexAuthorId" class="form-label">OpenAlex Author ID</label>
+            <input asp-for="OpenAlexAuthorId" class="form-control" placeholder="A1234567890" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="DisplayName" class="form-label">OpenAlex Display Name</label>
+            <input asp-for="DisplayName" class="form-control" placeholder="Optional" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Orcid" class="form-label">ORCID</label>
+            <input asp-for="Orcid" class="form-control" placeholder="Optional" />
+        </div>
+        <button class="btn btn-primary">Verify Author Match</button>
+    </form>
+}

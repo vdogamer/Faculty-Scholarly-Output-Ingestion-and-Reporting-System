@@ -1,0 +1,75 @@
+@page
+@model FacultyPub.Web.Pages.Lookup.IndexModel
+@{
+    ViewData["Title"] = "OpenAlex Lookup";
+}
+<h1>OpenAlex Lookup</h1>
+<p class="text-muted">Use this to inspect the supplied PMID or Work ID and identify the correct author ID that starts with <code>A</code>.</p>
+
+@if (!Model.IsOpenAlexConfigured)
+{
+    <div class="alert alert-warning">OpenAlex API key is not configured. Lookup requires <code>OpenAlex:ApiKey</code>.</div>
+}
+
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-8">
+        <input class="form-control" asp-for="Identifier" placeholder="Example: 35976718, W4292121792, or A1234567890" />
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary">Lookup</button>
+    </div>
+</form>
+
+@if (Model.Classification is not null)
+{
+    <div class="alert alert-info">
+        <strong>Classification:</strong> @Model.Classification.Kind — @Model.Classification.Message
+    </div>
+}
+
+@if (Model.ErrorMessage is not null)
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+@if (Model.Author is not null)
+{
+    <h2>Author</h2>
+    <dl class="row">
+        <dt class="col-sm-3">ID</dt><dd class="col-sm-9"><code>@Model.Author.Id</code></dd>
+        <dt class="col-sm-3">Name</dt><dd class="col-sm-9">@Model.Author.DisplayName</dd>
+        <dt class="col-sm-3">ORCID</dt><dd class="col-sm-9">@Model.Author.Orcid</dd>
+        <dt class="col-sm-3">Works</dt><dd class="col-sm-9">@Model.Author.WorksCount</dd>
+        <dt class="col-sm-3">Cited By</dt><dd class="col-sm-9">@Model.Author.CitedByCount</dd>
+    </dl>
+}
+
+@if (Model.Work is not null)
+{
+    <h2>Work</h2>
+    <dl class="row">
+        <dt class="col-sm-3">OpenAlex Work ID</dt><dd class="col-sm-9"><code>@Model.Work.Id</code></dd>
+        <dt class="col-sm-3">Title</dt><dd class="col-sm-9">@(Model.Work.DisplayName ?? Model.Work.Title)</dd>
+        <dt class="col-sm-3">DOI</dt><dd class="col-sm-9">@Model.Work.Doi</dd>
+        <dt class="col-sm-3">PMID</dt><dd class="col-sm-9">@Model.Work.Ids?.Pmid</dd>
+        <dt class="col-sm-3">PMCID</dt><dd class="col-sm-9">@Model.Work.Ids?.Pmcid</dd>
+        <dt class="col-sm-3">Source</dt><dd class="col-sm-9">@Model.Work.PrimaryLocation?.Source?.DisplayName</dd>
+    </dl>
+
+    <h3>Authors on this work</h3>
+    <table class="table table-striped table-sm">
+        <thead><tr><th>Position</th><th>Author</th><th>OpenAlex Author ID</th><th>ORCID</th><th>Corresponding</th></tr></thead>
+        <tbody>
+        @foreach (var a in Model.Work.Authorships)
+        {
+            <tr>
+                <td>@a.AuthorPosition</td>
+                <td>@a.Author?.DisplayName</td>
+                <td><code>@FacultyPub.Web.Pages.Lookup.IndexModel.ShortId(a.Author?.Id)</code></td>
+                <td>@a.Author?.Orcid</td>
+                <td>@a.IsCorresponding</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,33 @@
+@page
+@model FacultyPub.Web.Pages.Matches.IndexModel
+@{
+    ViewData["Title"] = "Author Matches";
+}
+<h1>OpenAlex Author Match Candidates</h1>
+<p class="text-muted">Ambiguous or unsafe matches should remain pending until reviewed. Name-only matches should not auto-approve.</p>
+<table class="table table-striped table-sm align-middle">
+    <thead><tr><th>Faculty</th><th>Department</th><th>Candidate ID</th><th>Candidate Name</th><th>Method</th><th>Score</th><th>Status</th><th>Evidence</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var c in Model.Candidates)
+    {
+        <tr>
+            <td>@c.FacultyDisplayName</td>
+            <td>@c.DepartmentName</td>
+            <td><code>@c.OpenAlexAuthorId</code></td>
+            <td>@c.OpenAlexDisplayName</td>
+            <td>@c.MatchMethod</td>
+            <td>@c.ConfidenceScore</td>
+            <td>@c.ReviewStatus</td>
+            <td><small><code>@c.EvidenceJson</code></small></td>
+            <td>
+                @if (c.ReviewStatus != "Rejected")
+                {
+                    <form method="post" asp-page-handler="Reject" asp-route-id="@c.MatchCandidateId">
+                        <button class="btn btn-sm btn-outline-danger">Reject</button>
+                    </form>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+@page
+@model FacultyPub.Web.Pages.Publications.ByDepartmentModel
+@{
+    ViewData["Title"] = "Publications By Department";
+}
+<h1>Publications by Department</h1>
+<table class="table table-striped table-sm">
+    <thead><tr><th>Department</th><th>Faculty</th><th>Publications</th><th>DOI</th><th>PMID</th><th>PMCID</th><th>PMID no PMCID</th><th>Open Access</th><th>Retracted</th></tr></thead>
+    <tbody>
+    @foreach (var row in Model.Rows)
+    {
+        <tr>
+            <td>@row.DepartmentName</td>
+            <td>@row.FacultyCount</td>
+            <td>@row.PublicationCount</td>
+            <td>@row.WithDoiCount</td>
+            <td>@row.WithPmidCount</td>
+            <td>@row.WithPmcidCount</td>
+            <td>@row.PmidWithoutPmcidCount</td>
+            <td>@row.OpenAccessCount</td>
+            <td>@row.RetractedCount</td>
+        </tr>
+    }
+    </tbody>
+</table>

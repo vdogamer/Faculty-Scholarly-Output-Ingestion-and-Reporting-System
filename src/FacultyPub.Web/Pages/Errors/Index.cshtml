@@ -1,0 +1,22 @@
+@page
+@model FacultyPub.Web.Pages.Errors.IndexModel
+@{
+    ViewData["Title"] = "API Errors";
+}
+<h1>API Error Log</h1>
+<table class="table table-striped table-sm">
+    <thead><tr><th>ID</th><th>Sync</th><th>Status</th><th>Endpoint</th><th>Error</th><th>Created</th></tr></thead>
+    <tbody>
+    @foreach (var error in Model.Errors)
+    {
+        <tr>
+            <td>@error.ApiErrorLogId</td>
+            <td>@error.SyncRunId</td>
+            <td>@error.HttpStatusCode</td>
+            <td><small><code>@error.QueryStringRedacted</code></small></td>
+            <td>@error.ErrorMessage</td>
+            <td>@error.CreatedUtc</td>
+        </tr>
+    }
+    </tbody>
+</table>

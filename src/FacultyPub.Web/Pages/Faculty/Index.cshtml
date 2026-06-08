@@ -1,0 +1,35 @@
+@page
+@model FacultyPub.Web.Pages.Faculty.IndexModel
+@{
+    ViewData["Title"] = "Faculty";
+}
+<h1>Faculty</h1>
+<table class="table table-striped table-sm align-middle">
+    <thead><tr><th>Name</th><th>Department</th><th>Title</th><th>OpenAlex</th><th>Works</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var row in Model.Faculty)
+    {
+        <tr>
+            <td>@row.DisplayName</td>
+            <td>@row.DepartmentName</td>
+            <td>@row.AppointmentTitle</td>
+            <td>
+                @if (row.HasVerifiedOpenAlex)
+                {
+                    <span class="badge bg-success">Verified</span> <code>@row.VerifiedOpenAlexAuthorId</code>
+                }
+                else if (row.CandidateCount > 0)
+                {
+                    <span class="badge bg-warning text-dark">@row.CandidateCount candidate(s)</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">Missing</span>
+                }
+            </td>
+            <td>@row.PublicationCount</td>
+            <td><a class="btn btn-sm btn-outline-primary" asp-page="/Faculty/Details" asp-route-id="@row.FacultyId">Open</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
